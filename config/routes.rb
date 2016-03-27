@@ -7,12 +7,20 @@ Rails.application.routes.draw do
   end
 
   resources :users, :only => [:show, :index]
+  resources :posts
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   devise_scope :user do
-    root to: "devise/sessions#new"
+    authenticated :user do
+      root 'posts#index'
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :anon_root
+    end
   end
 
   # Example of regular route:
