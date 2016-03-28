@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:sessions]
+  devise_for :users, :skip => [:sessions], :controllers => {:registrations => "registrations"}
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session
     post 'login' => 'devise/sessions#create', :as => :user_session
@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, :only => [:show, :index]
+  resources :profiles, :only => [:update]
+  get "profile/edit" => "profiles#edit", as: :edit_profile
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,18 @@
+<% @user ||= current_user %>
+
+<section class="user_info">
+      <h1>
+        <%= @user.name %>
+      </h1>
+      <p><%= @user.email %></p>
+	  <% if @user.location && !@user.location.empty? %><p><%= @user.location %></p><% end %>
+	  <% if @user.birthday %><p><%= @user.age %> years old</p><% end %>
+	  <% if @user.about && !@user.about.empty? %><p><%= @user.about %></p><% end %>
+    </section>
+<section class="friends">
+	<% if @user == current_user %>
+		<p><small>You have no friends :(<br>
+			<%= link_to "Find some friends!", "#" %>
+		</small></p>
+	<% end %>
+</section>
