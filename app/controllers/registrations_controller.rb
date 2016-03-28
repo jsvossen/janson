@@ -22,8 +22,4 @@ class RegistrationsController < Devise::RegistrationsController
 	    '/profile/edit' # Or :prefix_to_your_route
 	  end
 
-    def after_sign_in_path_for(resource)
-      root_path
-    end
-
 end 

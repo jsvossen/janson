@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, :only => [:show, :index]
-  resources :profiles, :only => [:update]
-  get "profile/edit" => "profiles#edit", as: :edit_profile
+  resource :profile, :only => [:update, :edit]
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.

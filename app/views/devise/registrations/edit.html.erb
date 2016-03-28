@@ -1,4 +1,4 @@
-<h1>Edit <%= resource_name.to_s.humanize %></h1>
+<h1><%= resource_name.to_s.humanize %> Account Settings</h1>
 
 <div class="col-md-6 col-md-offset-3">
 
@@ -33,10 +33,13 @@
       <%= f.submit "Update", class: "btn btn-primary" %>
     </div>
   <% end %>
-
-  <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<hr>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">Cancel my account</h3></div>
+    <div class="panel-body">
+      <p>Unhappy with JAnSoN? Cancel your account by clicking the button below. <em>This will delete all of your posts and comments. Cancelled accounts cannot be recovered.</em> <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your JAnSoN account? This action cannot be undone." }, method: :delete, class: "btn btn-danger" %></p>
+    </div>
+  </div>
 
   <%= link_to "Back", :back %>
 
