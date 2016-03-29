@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :posts, dependent: :destroy
 
+  scope :by_name_asc, -> { joins(:profile).order("profiles.name") }
+
   def name
   	profile.name
   end

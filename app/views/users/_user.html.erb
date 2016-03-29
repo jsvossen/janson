@@ -1,0 +1,22 @@
+<% 
+classes = [ "user-#{user.id}" ]
+classes << "current-user" if user == current_user
+%>
+
+<li class="<%= classes.join(' ') %>">
+  <%= link_to user do %>
+ 	 <%= gravatar_for user, size: 50 %>
+  <% end %>
+  <%= link_to user.name, user %>
+  <% if user.location && !user.location.empty? %>
+  	<small class="text-muted">- <%= user.location %></small>
+  <% end %>
+  
+  <div class="friend-status">
+  	<% if user != current_user %>
+  		<%= link_to "+ Add Friend", "#", class: "btn btn-xs btn-default" %>
+	<% else %>
+		<small class="text-muted"><em>This is you.</em></small>
+  	<% end %>
+  </div>
+</li>
