@@ -4,7 +4,7 @@
 michael:
    name: Umbrellawarrior
    location: Canada
-   birthday: 1985-04-03
+   birthday: <%= 30.years.ago %>
    about: "Lorem ipsum dolor sit amet."
    user: michael
 
