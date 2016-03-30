@@ -1,0 +1,15 @@
+<% friendship = Friendship.find_by(user: current_user, friend: friend) %>
+
+<span class="unfriend">
+	<% if friendship.status == "requested" %>
+
+		<span class="status">Your friend request is pending.</span>
+		<%= link_to "Cancel Request", friendship, method: "delete" %>
+
+	<% else %>
+		
+		<span class="status">Your are friends.</span>
+		<%= link_to "Unfriend", friendship, method: "delete" %>
+
+	<% end %>
+</span>

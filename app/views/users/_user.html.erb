@@ -1,6 +1,7 @@
 <% 
 classes = [ "user-#{user.id}" ]
 classes << "current-user" if user == current_user
+classes << current_user.friend_status(user) if current_user.friend_status(user)
 %>
 
 <li class="<%= classes.join(' ') %>">
@@ -14,9 +15,13 @@ classes << "current-user" if user == current_user
   
   <div class="friend-status">
   	<% if user != current_user %>
-    <%= render "friendships/add_friend", friend: user.id %>
-	<% else %>
-		<small class="text-muted"><em>This is you.</em></small>
+      <% if user.friends.include?(current_user) %>
+        <small class="text-muted"><em><%= render "friendships/remove_friend", friend: user %></em></small>
+      <% else %>
+        <small class="text-muted"><em><%= render "friendships/add_friend", friend: user.id %></em></small>
+      <% end %>
+	  <% else %>
+		  <small class="text-muted"><em>This is you.</em></small>
   	<% end %>
   </div>
 </li>

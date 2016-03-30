@@ -7,6 +7,10 @@ class Friendship < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :friend, :class_name => "User"
 
+	scope :requested, -> { where(status: "requested") }
+	scope :pending, -> { where(status: "pending") }
+	scope :accepted, -> { where(status: "accepted") }
+
 	private
 
 		def friend_is_not_self

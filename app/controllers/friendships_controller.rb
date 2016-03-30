@@ -21,6 +21,18 @@ class FriendshipsController < ApplicationController
 	end
 
 	def destroy
+		friendship = Friendship.find(params[:id])
+		reciprocal = Friendship.find_by(friend_id: friendship.user_id)
+		friendship.destroy
+		reciprocal.destroy
+		if friendship.status == "requested"
+			flash[:success] = "Friend request cancelled."
+		elsif friendship.status == "pending"
+			flash[:success] = "Friend request declined."
+		else
+			flash[:success] = "You are no longer friends with #{User.find(friendship.friend_id)}."
+		end
+		redirect_to User.find(friendship.friend_id)
 	end
 
 	private

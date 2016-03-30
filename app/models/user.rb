@@ -7,7 +7,17 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :friendships, dependent: :destroy
-  has_many :friends, :through => :friendships
+  has_many :friends, :through => :friendships do
+    def requested
+      where("friendships.status = ?", "requested")
+    end
+    def pending
+      where("friendships.status = ?", "pending")
+    end
+    def accepted
+      where("friendships.status = ?", "accepted")
+    end
+  end
 
   scope :by_name_asc, -> { joins(:profile).order("profiles.name") }
 
@@ -32,6 +42,11 @@ class User < ActiveRecord::Base
 
   def about
   	profile.about
+  end
+
+  def friend_status(user)
+    friendship = Friendship.find_by(user: self, friend: user)
+    friendship ? friendship.status : false
   end
 
 end
