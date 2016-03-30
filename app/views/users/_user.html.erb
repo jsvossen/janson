@@ -14,7 +14,7 @@ classes << "current-user" if user == current_user
   
   <div class="friend-status">
   	<% if user != current_user %>
-  		<%= link_to "+ Add Friend", "#", class: "btn btn-xs btn-default" %>
+    <%= render "friendships/add_friend", friend: user.id %>
 	<% else %>
 		<small class="text-muted"><em>This is you.</em></small>
   	<% end %>

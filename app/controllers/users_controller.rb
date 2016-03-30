@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.paginate(page: params[:page]).by_name_asc
+		@friend_req = current_user.friendships.build
 	end
 
 	def show

@@ -6,8 +6,14 @@ Rails.application.routes.draw do
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  resources :users, :only => [:show, :index]
-  resource :profile, :only => [:update, :edit]
+  resources :users, :only => [:show, :index] do
+    get :friends
+  end
+
+  resource  :profile, :only => [:update, :edit]
+
+  resources :friendships, :only => [:create, :update, :destroy]
+
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
