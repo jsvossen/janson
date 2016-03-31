@@ -1,0 +1,41 @@
+<h1>
+	<% if @user == current_user %>
+		My
+	<% else %>
+		<%= @user.name %>'s
+	<% end %>
+		Friends
+</h1>
+
+<div class="col-md-6 col-md-offset-3">
+
+	<% if @user == current_user && @pending_requests.any? %>
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+    			<h3 class="panel-title"><%= pluralize(@pending_requests.count,"Friend Request") %> Pending</h3>
+  			</div>
+			<div class="panel-body">
+				<ul class="users requests">
+					<%= render partial: "user", collection: @pending_requests %>
+				</ul>
+			</div>
+		</div>
+	<% end %>
+
+	<% if @user == current_user && @sent_requests.any? %>
+		<ul class="users requests">
+			<%= render partial: "user", collection: @sent_requests %>
+		</ul>
+	<% end %>
+
+	<% if @friends.any? %>
+		<%= will_paginate %>
+
+		<ul class="users friends">
+			<%= render "user", collection: @friends, as: :user  %>
+		</ul>
+
+		<%= will_paginate %>
+	<% end %>
+
+</div>

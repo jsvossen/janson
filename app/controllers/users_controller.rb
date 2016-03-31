@@ -11,4 +11,13 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def friends
+		@user = User.find(params[:user_id])
+		@friends = @user.friends.accepted.paginate(page: params[:page]).by_name_asc
+		if @user == current_user
+			@sent_requests = @user.friends.requested.by_name_asc
+			@pending_requests = @user.friends.pending.by_name_asc
+		end
+	end
+
 end

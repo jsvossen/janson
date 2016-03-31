@@ -15,10 +15,10 @@ classes << current_user.friend_status(user) if current_user.friend_status(user)
   
   <div class="friend-status">
   	<% if user != current_user %>
-      <% if user.friends.include?(current_user) %>
+      <% if current_user.friends.include?(user) && current_user.friend_status(user) != "pending" %>
         <small class="text-muted"><em><%= render "friendships/remove_friend", friend: user %></em></small>
       <% else %>
-        <small class="text-muted"><em><%= render "friendships/add_friend", friend: user.id %></em></small>
+       <small><%= render "friendships/add_friend", friend: user %></small>
       <% end %>
 	  <% else %>
 		  <small class="text-muted"><em>This is you.</em></small>
