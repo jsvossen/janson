@@ -13,11 +13,22 @@ class FriendshipsController < ApplicationController
 		else
 			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
 			flash[:danger] = "#{errors.uniq.join('. ')}."
-			redirect_to User.where(id: fid).any? ? User.find(fid) : root_path
+			redirect_to :back
 		end
 	end
 
 	def update
+		friendship = Friendship.find(params[:id])
+		reciprocal = Friendship.find_by(friend_id: friendship.user_id)
+		if friendship.update_attributes(status: "accepted") && reciprocal.update_attributes(status: "accepted")
+			friend = User.find(friendship.friend_id)
+			flash[:success] = "You are now friends with #{friend.name}!"
+			redirect_to User.find(friend)
+		else
+			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
+			flash[:danger] = "#{errors.uniq.join('. ')}."
+			redirect_to :back
+		end
 	end
 
 	def destroy
@@ -32,7 +43,7 @@ class FriendshipsController < ApplicationController
 		else
 			flash[:success] = "You are no longer friends with #{User.find(friendship.friend_id)}."
 		end
-		redirect_to User.find(friendship.friend_id)
+		redirect_to :back
 	end
 
 	private

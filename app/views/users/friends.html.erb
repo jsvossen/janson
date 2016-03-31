@@ -15,7 +15,7 @@
     			<h3 class="panel-title"><%= pluralize(@pending_requests.count,"Friend Request") %> Pending</h3>
   			</div>
 			<div class="panel-body">
-				<ul class="users requests">
+				<ul class="users pending">
 					<%= render partial: "user", collection: @pending_requests %>
 				</ul>
 			</div>
@@ -29,13 +29,13 @@
 	<% end %>
 
 	<% if @friends.any? %>
-		<%= will_paginate %>
+		<%= will_paginate @friends %>
 
 		<ul class="users friends">
-			<%= render "user", collection: @friends, as: :user  %>
+			<%= render partial: "user", collection: @friends  %>
 		</ul>
 
-		<%= will_paginate %>
+		<%= will_paginate @friends %>
 	<% end %>
 
 </div>

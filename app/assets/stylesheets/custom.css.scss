@@ -219,6 +219,29 @@ aside {
   .friend-status { margin-top: 5px; }
 }
 
+.users.requests {
+  background: #eee;
+  opacity: 0.6;
+}
+
+.users.friends {
+  .status {
+    display: none;
+  }
+}
+
+.friend-links {
+   a {
+    color: inherit;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}
+
+
 
 
 /* forms */
