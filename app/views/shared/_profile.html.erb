@@ -19,9 +19,14 @@
 </section>
 <% end %>
 <section class="friends">
-	<% if @user == current_user %>
-		<p><small>You have no friends :(<br>
-			<%= link_to "Find some friends!", users_path %>
-		</small></p>
+	<% if @user.friends.accepted.any? %>
+		<p><%= link_to pluralize(@user.friends.accepted.count, "Friend"), user_friends_path(@user) %></p>
+		<div class="user_avatars">
+			<% @user.friends.accepted.each do |user| %>
+				<%= link_to user, title: user.name do %>
+					<%= gravatar_for user, size: 30 %>
+				<% end %>
+			<% end %>
+		</div>
 	<% end %>
 </section>
