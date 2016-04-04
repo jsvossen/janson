@@ -1,8 +1,29 @@
 <div class="row">
+
   <aside class="col-md-4">
     <%= render 'shared/profile' %>
   </aside>
+
   <div class="col-md-8">
-    News Feed...
+  	<h3><%= current_user == @user ? "My" : @user.name+"'s" %> Posts</h3>
+    <% if @user == current_user %>
+    	<%= render "posts/post_form" %>
+    <% end %>
+
+    <% if @user.posts.any? %>
+    	<ol class="posts">
+    		<%= render partial: "posts/post", collection: @user.posts %>
+    	</ol>
+    <% else %>
+    	<p class="text-muted"><em>
+    		<% if @user == current_user %>
+    			You have not posted anything.
+    		<% else %>
+    			<%= @user.name %> has not posted anything.
+    		<% end %>
+    	</em></p>
+    <% end %>
+
   </div>
+
 </div>

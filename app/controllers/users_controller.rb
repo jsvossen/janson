@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@post = Post.new if @user == current_user
 	end
 
 	def friends
