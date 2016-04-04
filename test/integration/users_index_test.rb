@@ -11,11 +11,11 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 		assert_template "users/index"
 		first_page = User.paginate(page: 1)
 		first_page.each do |user|
-			assert_select "a[href=?]", user_path(user), user.name
+			assert_select 'a[href=?]', user_path(user), text: user.name
 			if user == @user
 				assert_select ".friend-status", text: "This is you."
 			else
-				assert_select ".friend-status>a", text: "+ Add Friend"
+				assert_select ".friend-status input[value=?]", "+ Add Friend" 
 			end
 		end
 	end

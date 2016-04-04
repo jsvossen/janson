@@ -11,3 +11,7 @@ tina:
 chris:
   email: chris@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+rando:
+  email: user@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

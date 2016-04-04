@@ -7,9 +7,9 @@ class FriendshipsController < ApplicationController
 		@friend_req = current_user.friendships.build(friend_id: fid, status: "requested")
 		@notification = Friendship.new(user_id: fid, friend_id: current_user.id, status: "pending")
 		if @friend_req.save && @notification.save
-			friend = User.find(fid)
+			friend = @friend_req.friend
 			flash[:success] = "A friend request has been sent to #{friend.name}!"
-			redirect_to User.find(friend)
+			redirect_to friend
 		else
 			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
 			flash[:danger] = "#{errors.uniq.join('. ')}."
@@ -21,9 +21,9 @@ class FriendshipsController < ApplicationController
 		friendship = Friendship.find(params[:id])
 		reciprocal = Friendship.find_by(friend_id: friendship.user_id)
 		if friendship.update_attributes(status: "accepted") && reciprocal.update_attributes(status: "accepted")
-			friend = User.find(friendship.friend_id)
+			friend = friendship.friend
 			flash[:success] = "You are now friends with #{friend.name}!"
-			redirect_to User.find(friend)
+			redirect_to friend
 		else
 			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
 			flash[:danger] = "#{errors.uniq.join('. ')}."

@@ -17,3 +17,6 @@ chris:
    name: Chris
    user: chris
 
+rando:
+   name: Random Person
+   user: rando

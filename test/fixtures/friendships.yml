@@ -4,8 +4,23 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+mutual1: 
+  user: michael
+  friend: tina
+  status: accepted
+
+mutual2:
+  user: tina
+  friend: michael
+  status: accepted
+
+pending: 
+  user: chris
+  friend: michael
+  status: pending
+
+requested:
+  user: michael
+  friend: chris
+  status: requested
