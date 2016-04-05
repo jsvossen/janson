@@ -1,6 +1,8 @@
 class FriendshipsController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :correct_user, only: :destroy
+	before_action :invited_user, only: :update
 
 	def create
 		fid = params[:friendship][:friend_id]
@@ -52,4 +54,15 @@ class FriendshipsController < ApplicationController
 			params.require(:friendship).permit(:user_id, :friend_id)
 		end
 
+		# only friendship members can delete friendship
+		def correct_user
+			@friendship = current_user.friendships.find_by(id: params[:id])
+			redirect_to root_path if @friendship.nil?
+		end
+
+		# only invited user can accept friendship
+		def invited_user
+			@friendship = current_user.friendships.find_by(id: params[:id])
+			redirect_to root_path unless @friendship && @friendship.status == "pending"
+		end
 end

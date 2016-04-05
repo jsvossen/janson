@@ -17,8 +17,8 @@ class FriendshipsControllerTest < ActionController::TestCase
 	end
 
 	test "should update both friendships when request is accepted" do
-		sign_in @user
 		@other_user = users(:chris)
+		sign_in @other_user
 		@friendship = friendships(:pending)
 		patch :update, id: @friendship
 		assert @user.friend_status(@other_user) == "accepted"
@@ -33,4 +33,25 @@ class FriendshipsControllerTest < ActionController::TestCase
 		    delete :destroy, id: @friendship
 		end
 	end
+
+	test "only friendship members can delete friendship" do
+		sign_in users(:rando)
+		@friendship = friendships(:mutual1)
+		assert_no_difference "Friendship.count" do
+			delete :destroy, id: @friendship
+		end
+		assert_redirected_to root_url
+	end
+
+	test "only invitee can accept friendship" do
+		sign_in @user
+		@other_user = users(:chris)
+		@friendship = friendships(:pending)
+		patch :update, id: @friendship
+		assert @user.friend_status(@other_user) == "requested"
+		assert @other_user.friend_status(@user) == "pending"
+		assert_redirected_to root_url
+	end
+
+
 end
