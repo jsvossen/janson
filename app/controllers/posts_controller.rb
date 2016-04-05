@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :correct_user, only: :destroy
 
 	def index
 		@posts = Post.all
@@ -28,6 +29,11 @@ class PostsController < ApplicationController
 
 		def post_params
 			params.require(:post).permit(:user_id, :body)
+		end
+
+		def correct_user
+			@post = current_user.posts.find_by(id: params[:id])
+			redirect_to root_path if @post.nil?
 		end
 
 end

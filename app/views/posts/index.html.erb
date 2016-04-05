@@ -5,5 +5,13 @@
   <div class="col-md-8">
   	<h3>What's New?</h3>
     <%= render "posts/post_form" %>
+  	<% if current_user.news_feed.any? %>
+    	<ol class="posts">
+    		<%= render partial: "posts/post", collection: current_user.news_feed %>
+    	</ol>
+    <% else %>
+    	<p class="text-muted"><em>
+    		No news...
+    	</em></p>
+    <% end %>
   </div>
-</div>
