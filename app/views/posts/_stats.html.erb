@@ -1,14 +1,22 @@
-<% if post.likes.any? %>
-	<span class="count like-count">
-		<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		<% if current_user.likes?(post) %>
-			<% if post.likes.count > 1 %>
-				You and <%= pluralize(post.likes.count-1, "other") %>
+<% if post.likes.any? || post.comments.any? %>
+	<% if post.likes.any? %>
+		<span class="count like-count">
+			<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+			<% if current_user.likes?(post) %>
+				<% if post.likes.count > 1 %>
+					You and <%= pluralize(post.likes.count-1, "other") %>
+				<% else %>
+					You like this
+				<% end %>
 			<% else %>
-				You like this
+				<%= post.likes.count %>
 			<% end %>
-		<% else %>
-			<%= post.likes.count %>
-		<% end %>
-	</span>
+		</span>
+	<% end %>
+	<% if post.comments.any? %>
+		<span class="count comment-count">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+			<%= post.comments.count %>
+		</span>
+	<% end %>
 <% end %>

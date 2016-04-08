@@ -294,11 +294,11 @@ input {
 .posts {
   list-style: none;
   padding: 0;
-  .user {
+  .panel-body > .user {
     margin-top: 5em;
     padding-top: 0;
   }
-  .content {
+  .panel-body > .content {
     display: block;
     margin-top: 5px;
     img {
@@ -339,6 +339,35 @@ span.picture {
   }
 }
 
+
+/* comments */
+
+.comments {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  font-size: 0.9em;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  .user, .content {
+    display: inline;
+  }
+
+  textarea, input { 
+    margin: 0; 
+    font-size: inherit;
+  }
+}
 
 
 /* footer */

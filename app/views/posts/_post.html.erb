@@ -1,7 +1,7 @@
 <li id="post-<%= post.id %>" class="panel panel-default">
   <div class="panel-body">
     <%= link_to gravatar_for(post.user, size: 35), post.user %>
-    <span class="user"><%= link_to post.user.name, post.user %></span>
+    <strong class="user"><%= link_to post.user.name, post.user %></strong>
     <small class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.
       <% if current_user == post.user %>
@@ -17,6 +17,12 @@
     <div class="post-stats text-muted">
       <%= render partial: "likes/like_form", :locals => { :post => post } %>
       <small><%= render partial: "posts/stats", :locals => { :post => post } %></small>
+    </div>
+    <div class="comments">
+      <% if post.comments.any? %>
+        <ul><%= render partial: "comments/comment", collection: post.comments %></ul>
+      <% end %>
+      <%= render partial: "comments/comment_form", :locals => { :post => post } %>
     </div>
   </div>
 </li>
