@@ -57,4 +57,8 @@ class User < ActiveRecord::Base
                user_id: id)
   end
 
+  def likes?(post)
+    !likes.find_by(post_id: post.id).nil?
+  end
+
 end

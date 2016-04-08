@@ -1,0 +1,16 @@
+<% if post.likes.any? %>
+<div class="post-stats">
+	<span class="like-count">
+		<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+		<% if current_user.likes?(post) %>
+			<% if post.likes.count > 1 %>
+				You and <%= pluralize(post.likes.count-1, "other") %>
+			<% else %>
+				You like this
+			<% end %>
+		<% else %>
+			<%= post.likes.count %>
+		<% end %>
+	</span>
+</div>
+<% end %>

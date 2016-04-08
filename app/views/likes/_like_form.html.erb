@@ -1,0 +1,13 @@
+<% if !current_user.likes?(post) %>
+	<%= form_for current_user.likes.build() do |f| %>
+		<%= f.hidden_field :post_id, value: post.id %>
+		<%= f.button :class => "btn btn-default btn-xs" do %>
+			<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+		<% end %>
+	<% end %>
+<% else %>
+	<% like = current_user.likes.find_by(post_id: post.id) %>
+	<%= link_to like, method: "delete", class: "btn btn-primary btn-xs" do %>
+		<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Liked
+	<% end %>
+<% end %>
