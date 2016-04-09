@@ -6,17 +6,17 @@ class LikesController < ApplicationController
 		@like = current_user.likes.build(like_params)
 		if @like.save
 			flash[:success] = "Post liked!"
-			redirect_to :back
+			redirect_to_back_or_default
 		else
 			flash[:danger] = "Error: #{@like.errors.full_messages.join('. ')}."
-			redirect_to :back
+			redirect_to_back_or_default
 		end
 	end
 
 	def destroy
 		current_user.likes.find_by(id: params[:id]).delete
 		flash[:success] = "Post unliked."
-		redirect_to :back
+		redirect_to_back_or_default
 	end
 
 	private

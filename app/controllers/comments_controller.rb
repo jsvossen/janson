@@ -7,17 +7,17 @@ class CommentsController < ApplicationController
 		@comment = current_user.comments.build(comment_params)
 		if @comment.save
 			flash[:success] = "Comment added!"
-			redirect_to :back
+			redirect_to_back_or_default
 		else
-			flash.now[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
-			render "posts/index"
+			flash[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
+			redirect_to_back_or_default
 		end
 	end
 
 	def destroy
 		Comment.find(params[:id]).delete
 		flash[:success] = "Comment deleted."
-		redirect_to :back
+		redirect_to_back_or_default
 	end
 
 	private

@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 		@post = current_user.posts.build(post_params)
 		if @post.save
 			flash[:success] = "Post created!"
-			redirect_to :back
+			redirect_to_back_or_default
 		else
 			flash.now[:danger] = "Error: #{@post.errors.full_messages.join('. ')}."
 			render "posts/index"
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 	def destroy
 		Post.find(params[:id]).delete
 		flash[:success] = "Post deleted."
-		redirect_to :back
+		redirect_to_back_or_default
 	end
 
 	private

@@ -15,7 +15,7 @@ class FriendshipsController < ApplicationController
 		else
 			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
 			flash[:danger] = "#{errors.uniq.join('. ')}."
-			redirect_to :back
+			redirect_to_back_or_default
 		end
 	end
 
@@ -29,7 +29,7 @@ class FriendshipsController < ApplicationController
 		else
 			errors = @friend_req.errors.full_messages + @notification.errors.full_messages
 			flash[:danger] = "#{errors.uniq.join('. ')}."
-			redirect_to :back
+			redirect_to_back_or_default
 		end
 	end
 
@@ -45,7 +45,7 @@ class FriendshipsController < ApplicationController
 		else
 			flash[:success] = "You are no longer friends with #{User.find(friendship.friend_id)}."
 		end
-		redirect_to :back
+		redirect_to_back_or_default
 	end
 
 	private

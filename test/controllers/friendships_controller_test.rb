@@ -26,7 +26,6 @@ class FriendshipsControllerTest < ActionController::TestCase
 	end
 
 	test "should delete both friendships on destroy" do
-		request.env["HTTP_REFERER"] = root_path
 		sign_in @user
 		@friendship = friendships(:mutual1)
 		assert_difference "Friendship.count", -2 do
