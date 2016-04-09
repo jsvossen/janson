@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.persisted?
     	init_name = @user.email.slice(0..(@user.email.index("@")-1)).capitalize
     	profile = @user.create_profile(name: init_name)
+      UserMailer.welcome_mailer(@user).deliver_later
     end
   end
 
