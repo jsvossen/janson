@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
 
   has_one :profile, dependent: :destroy
   has_many :posts, dependent: :destroy
@@ -23,12 +24,14 @@ class User < ActiveRecord::Base
 
   scope :by_name_asc, -> { joins(:profile).order("profiles.name") }
 
+  after_create :send_welcome_email
+
   def name
-  	profile.name
+  	profile.name if profile
   end
 
   def birthday
-  	profile.birthday
+  	profile.birthday if profile
   end
 
   def age
@@ -39,11 +42,11 @@ class User < ActiveRecord::Base
   end
 
   def location
-  	profile.location
+  	profile.location if profile
   end
 
   def about
-  	profile.about
+  	profile.about if profile
   end
 
   def friend_status(user)
@@ -61,5 +64,22 @@ class User < ActiveRecord::Base
   def likes?(post)
     !likes.find_by(post_id: post.id).nil?
   end
+
+  def self.from_omniauth(auth)
+    auth_req = { new_user: false }
+    auth_req[:user] = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.create_profile(name: auth.info.name)
+      auth_req[:new_user] = true
+      #user.image = auth.info.image # assuming the user model has an image
+    end
+    auth_req
+  end
+
+  private
+    def send_welcome_email
+      UserMailer.welcome_mailer(self).deliver_later
+    end
 
 end
