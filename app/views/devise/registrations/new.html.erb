@@ -2,6 +2,14 @@
 
 <div class="col-md-6 col-md-offset-3">
 
+  <p class="text-center">
+    <%= link_to image_tag("fb_connect.png", alt: "Connect using Facebook", width: 300),
+              user_omniauth_authorize_path(:facebook) %>
+  </p>
+  <hr>
+      <p class="text-center text-muted">or create an account below</p>
+  <hr>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
