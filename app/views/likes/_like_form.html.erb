@@ -6,8 +6,10 @@
 		<% end %>
 	<% end %>
 <% else %>
+	<small>
 	<% like = current_user.likes.find_by(post_id: post.id) %>
-	<%= link_to like, method: "delete", class: "btn btn-primary btn-xs" do %>
-		<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Liked
+	<%= link_to like, method: "delete", class: "btn btn-default btn-xs" do %>
+		x unlike
 	<% end %>
+	</small>
 <% end %>
