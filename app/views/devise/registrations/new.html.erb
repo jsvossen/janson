@@ -4,7 +4,7 @@
 
   <p class="text-center">
     <%= link_to image_tag("fb_connect.png", alt: "Connect using Facebook", width: 300),
-              user_omniauth_authorize_path(:facebook) %>
+              user_omniauth_authorize_path(:facebook), class: "fb-signin" %>
   </p>
   <hr>
       <p class="text-center text-muted">or create an account below</p>

@@ -1,0 +1,13 @@
+jQuery ->
+	$.ajax
+		url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+		dataType: "script"
+		cache: true
+
+window.fbAsyncInit = ->
+	FB.init(appId: "<%= ENV['fb_id'] %>", cookie: true)
+
+	$(".fb-signin").click (e) ->
+		e.preventDefault()
+		FB.login (response) ->
+			window.location = "users/auth/facebook/callback" if response.authResponse

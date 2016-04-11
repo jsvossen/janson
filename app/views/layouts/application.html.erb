@@ -8,8 +8,9 @@
   <%= render 'layouts/shim' %>
 </head>
 <body>
-
-    <%= render 'layouts/header' %>
+  <div id='fb-root'></div>
+  
+  <%= render 'layouts/header' %>
 
 	<div class="container">
     <% flash.each do |message_type, message| %>
