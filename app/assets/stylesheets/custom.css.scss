@@ -31,6 +31,8 @@ textarea {
 	}
 }
 
+img { max-width: 100%; height: auto !important; }
+
 
 /* typography */
 
@@ -254,6 +256,7 @@ input, textarea, select, .uneditable-input {
 }
 
 input[type=submit] { width: auto; }
+input[type=file] { border: none; }
 
 input {
   height: auto !important;
@@ -285,6 +288,17 @@ input {
 
 #user_remember_me {
   width: auto;
+}
+
+#new-post {
+  .group-half {
+    width: 50%;
+    float: left;
+    .pic {
+      margin-left: 20px;
+    }
+  }
+  .submit { clear: both; }
 }
 
 
