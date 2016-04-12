@@ -70,9 +70,8 @@ class User < ActiveRecord::Base
     auth_req[:user] = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.create_profile(name: auth.info.name)
+      user.create_profile(name: auth.info.name, avatar: URI.parse(auth.info.image))
       auth_req[:new_user] = true
-      #user.image = auth.info.image # assuming the user model has an image
     end
     auth_req
   end

@@ -5,9 +5,7 @@ classes << current_user.friend_status(user) if current_user.friend_status(user)
 %>
 
 <li class="<%= classes.join(' ') %>">
-  <%= link_to user do %>
- 	 <%= gravatar_for user, size: 50 %>
-  <% end %>
+  <%= link_to image_tag(user.profile.avatar.url(:thumb), alt: user.name, class: "gravatar"), user %>
   <%= link_to user.name, user %>
   <% if user.location && !user.location.empty? %>
   	<small class="text-muted">- <%= user.location %></small>

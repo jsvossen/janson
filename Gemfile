@@ -21,7 +21,7 @@ gem 'bootstrap-will_paginate'
 
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog'
+gem 'paperclip', '~> 5.0.0.beta1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

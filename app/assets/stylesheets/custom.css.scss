@@ -126,6 +126,9 @@ p {
 aside {
   section.user_info {
     margin-top: 20px;
+    .gravatar {
+      width: 125px;
+    }
   }
   section {
     padding: 10px 0;
@@ -160,6 +163,7 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+  width: 50px;
 }
 
 .gravatar_edit {
@@ -194,6 +198,7 @@ aside {
   margin-top: 10px;
   .gravatar {
     margin: 1px 1px;
+    width: 30px;
   }
   a {
     padding: 0;
@@ -256,7 +261,7 @@ input, textarea, select, .uneditable-input {
 }
 
 input[type=submit] { width: auto; }
-input[type=file] { border: none; }
+input[type=file] { border: none; margin: 0; }
 
 input {
   height: auto !important;
@@ -313,7 +318,7 @@ input {
   }
   .panel-body > .content {
     display: block;
-    margin-top: 5px;
+    margin-top: 10px;
     img {
       display: block;
       padding: 5px 0;
@@ -326,6 +331,8 @@ input {
   .gravatar {
     float: left;
     margin-right: 10px;
+    width: 45px;
+    margin-top: -3px;
   }
 }
 
@@ -379,6 +386,10 @@ span.picture {
   textarea, input { 
     margin: 0; 
     font-size: inherit;
+  }
+  .gravatar {
+    width: 30px;
+    margin-top: 2px;
   }
 }
 

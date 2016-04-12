@@ -1,6 +1,6 @@
-<li id="post-<%= post.id %>" class="panel panel-default">
+<li id="post-<%= post.id %>" class="post panel panel-default">
   <div class="panel-body">
-    <%= link_to gravatar_for(post.user, size: 35), post.user %>
+    <%= link_to image_tag(post.user.profile.avatar.url(:thumb), alt: post.user.name, class: "gravatar"), post.user %>
     <strong class="user"><%= link_to post.user.name, post.user %></strong>
     <small class="timestamp">
       Posted <%= time_ago_or_date(post.created_at) %>.
