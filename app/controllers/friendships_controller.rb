@@ -21,7 +21,7 @@ class FriendshipsController < ApplicationController
 
 	def update
 		friendship = Friendship.find(params[:id])
-		reciprocal = Friendship.find_by(friend_id: friendship.user_id)
+		reciprocal = Friendship.find_by(user_id: friendship.friend_id, friend_id: friendship.user_id)
 		if friendship.update_attributes(status: "accepted") && reciprocal.update_attributes(status: "accepted")
 			friend = friendship.friend
 			flash[:success] = "You are now friends with #{friend.name}!"
@@ -35,7 +35,7 @@ class FriendshipsController < ApplicationController
 
 	def destroy
 		friendship = Friendship.find(params[:id])
-		reciprocal = Friendship.find_by(friend_id: friendship.user_id)
+		reciprocal = Friendship.find_by(user_id: friendship.friend_id, friend_id: friendship.user_id)
 		friendship.destroy
 		reciprocal.destroy
 		if friendship.status == "requested"
@@ -43,7 +43,7 @@ class FriendshipsController < ApplicationController
 		elsif friendship.status == "pending"
 			flash[:success] = "Friend request declined."
 		else
-			flash[:success] = "You are no longer friends with #{User.find(friendship.friend_id)}."
+			flash[:success] = "You are no longer friends with #{User.find(friendship.friend_id).name}."
 		end
 		redirect_to_back_or_default
 	end
