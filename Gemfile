@@ -19,7 +19,6 @@ gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
-gem 'carrierwave'
 gem 'mini_magick'
 gem 'paperclip', '~> 5.0.0.beta1'
 

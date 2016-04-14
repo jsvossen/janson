@@ -1,9 +1,7 @@
 class Post < ActiveRecord::Base
 
 	validate :not_empty
-	#validate :picture_size
 
-	# mount_uploader :picture, PictureUploader
 	has_attached_file :picture, styles: { medium: "400x400>" }
   	validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
   	validates_with AttachmentSizeValidator, attributes: :picture, less_than: 500.kilobytes
@@ -16,13 +14,6 @@ class Post < ActiveRecord::Base
 
 
 	private
-
-		# Validates the size of an uploaded picture.
-	  	def picture_size
-	  		if picture.size > 500.kilobytes
-	  			errors.add(:picture, "should be less than 500 KB")
-	  		end
-	  	end
 
 	  	# Validates either body or photo is present
 	  	def not_empty
