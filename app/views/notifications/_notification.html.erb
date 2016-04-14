@@ -8,7 +8,8 @@
 		<% @sender = notification.sender %>
 		<%= link_to image_tag(@sender.profile.avatar.url(:thumb), alt: @sender.name, class: "gravatar"), @sender %>
 
-		<% if notification.type == "Friendship" %>
+		<% case notification.type
+			when "Friendship" %>
 			<p><strong class="user"><%= link_to @sender.name, @sender %></strong>
 				<% if notification.notifiable.status == "accepted" %>
 					has accepted your friend request!
@@ -16,6 +17,10 @@
 					wants to be friends.
 					<small><%= render "friendships/add_friend", friend: @sender %></small>
 				<% end %>
+			</p>
+		<% when "Like" %>
+			<p><strong class="user"><%= link_to @sender.name, @sender %></strong>
+				likes your post!
 			</p>
 		<% end %>
 

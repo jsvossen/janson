@@ -5,6 +5,8 @@ module NotificationsHelper
 		case notification.type
 			when "Friendship"
 				"user"
+			when "Like"
+				"thumbs-up"
 			else
 				"exclamation-sign"
 		end

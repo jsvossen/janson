@@ -5,6 +5,7 @@ class LikesController < ApplicationController
 	def create
 		@like = current_user.likes.build(like_params)
 		if @like.save
+			@like.notifications.create(user: @like.post.user)
 			flash[:success] = "Post liked!"
 			redirect_to_back_or_default
 		else
@@ -14,7 +15,7 @@ class LikesController < ApplicationController
 	end
 
 	def destroy
-		current_user.likes.find_by(id: params[:id]).delete
+		current_user.likes.find_by(id: params[:id]).destroy
 		flash[:success] = "Post unliked."
 		redirect_to_back_or_default
 	end

@@ -7,11 +7,10 @@ class Notification < ActiveRecord::Base
   end
 
   def sender
-  	case type
-  		when "Friendship"
+  	if type == "Friendship"
   			notifiable.friend
-  		else
-  			nil
+    else
+        notifiable.user
   	end
   end
 
