@@ -61,6 +61,24 @@ p {
   line-height: 1.7em;
 }
 
+.panel-horizontal {
+  > .panel-heading {
+    float: left;
+    padding: 15px;
+    border-bottom: 0;
+    border-right: 1px solid inherit;
+  }
+  > .panel-body {
+    float: left;
+  }
+  &:after {
+    content: " ";
+    height: 0;
+    clear: both;
+    display: table;
+  }
+}
+
 
 /* header */
 
@@ -392,6 +410,17 @@ span.picture {
     margin-top: 2px;
   }
 }
+
+
+/* notifications */
+
+.notify {
+  p {
+    margin: 0;
+  }
+}
+
+
 
 
 /* footer */

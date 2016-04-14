@@ -1,0 +1,28 @@
+<div class="panel panel-default notify" id="notify-<%= notification.id %>">
+	<div class="panel-body">
+
+		<%= form_for notification, html: { method: :delete } do |f| %>
+			<%= f.button class: "close" do %>&times;<% end %>
+		<% end %>
+
+		<% @sender = notification.sender %>
+		<%= link_to image_tag(@sender.profile.avatar.url(:thumb), alt: @sender.name, class: "gravatar"), @sender %>
+
+		<% if notification.type == "Friendship" %>
+			<p><strong class="user"><%= link_to @sender.name, @sender %></strong>
+				<% if notification.notifiable.status == "accepted" %>
+					has accepted your friend request!
+				<% elsif notification.notifiable.status == "pending" %>
+					wants to be friends.
+					<small><%= render "friendships/add_friend", friend: @sender %></small>
+				<% end %>
+			</p>
+		<% end %>
+
+		<small class="text-muted">
+			<span class="glyphicon glyphicon-<%= glyph(notification) %>" aria-hidden="true"></span>
+			<%= time_ago_or_date(notification.created_at) %>
+		</small>
+
+	</div>
+</div>

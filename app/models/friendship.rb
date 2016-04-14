@@ -7,6 +7,8 @@ class Friendship < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :friend, :class_name => "User"
 
+	has_many :notifications, as: :notifiable, dependent: :destroy
+
 	scope :requested, -> { where(status: "requested") }
 	scope :pending, -> { where(status: "pending") }
 	scope :accepted, -> { where(status: "accepted") }
