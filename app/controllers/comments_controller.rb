@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
 	def create
 		@comment = current_user.comments.build(comment_params)
 		if @comment.save
+			@comment.notifications.create(user: @comment.post.user)
 			flash[:success] = "Comment added!"
 			redirect_to_back_or_default
 		else
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		Comment.find(params[:id]).delete
+		Comment.find(params[:id]).destroy
 		flash[:success] = "Comment deleted."
 		redirect_to_back_or_default
 	end

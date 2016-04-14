@@ -7,6 +7,8 @@ module NotificationsHelper
 				"user"
 			when "Like"
 				"thumbs-up"
+			when "Comment"
+				"comment"
 			else
 				"exclamation-sign"
 		end
