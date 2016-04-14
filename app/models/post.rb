@@ -1,9 +1,12 @@
 class Post < ActiveRecord::Base
 
 	validate :not_empty
-	validate :picture_size
+	#validate :picture_size
 
-	mount_uploader :picture, PictureUploader
+	# mount_uploader :picture, PictureUploader
+	has_attached_file :picture, styles: { medium: "400x400>" }
+  	validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
+  	validates_with AttachmentSizeValidator, attributes: :picture, less_than: 500.kilobytes
 
 	belongs_to :user
 	has_many :likes, dependent: :destroy
