@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 	before_action :correct_user, only: :destroy
 
 	def index
-		@posts = Post.all
 		@post = current_user.posts.build
 	end
 

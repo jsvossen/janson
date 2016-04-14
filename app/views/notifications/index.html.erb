@@ -2,6 +2,10 @@
 
 <div class="col-md-6 col-md-offset-3">
 
-<%= render @notifications %>
+	<% if @notifications.any? %>
+		<%= render @notifications %>
+	<% else %>
+		<p>No pending notifications.</p>
+	<% end %>
 
 </div>

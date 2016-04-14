@@ -2,7 +2,7 @@
 	<div class="panel-body">
 
 		<%= form_for notification, html: { method: :delete } do |f| %>
-			<%= f.button class: "close" do %>&times;<% end %>
+			<%= f.button class: "close", title: "Dismiss" do %>&times;<% end %>
 		<% end %>
 
 		<% @sender = notification.sender %>
