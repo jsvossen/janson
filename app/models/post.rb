@@ -12,6 +12,9 @@ class Post < ActiveRecord::Base
 
 	default_scope -> { order(created_at: :desc) }
 
+	def photo
+		picture_file_name
+	end
 
 	private
 

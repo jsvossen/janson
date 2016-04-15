@@ -18,9 +18,11 @@
 						<small><%= render "friendships/add_friend", friend: @sender %></small>
 					<% end %>
 			<% when "Like" %>
-					likes your post!
+					likes your <%= descriptive_link(notification.notifiable.post) %>.
 			<% when "Comment" %>
-					commented on your post!
+					commented on your
+					<%= notification.notifiable.post.photo ? link_to("photo", notification.notifiable.post)
+						: link_to("post", notification.notifiable.post) %>.
 			<% end %>
 		</p>
 
