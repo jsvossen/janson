@@ -1,14 +1,21 @@
 <li id="commment-<%= comment.id %>" class="comment">
+
+	<% if current_user == comment.user || current_user == comment.post.user %>
+		<%= form_for comment, html: { method: :delete }, data: { confirm: "Delete this comment?" }, title: "Delete" do |f| %>
+			<%= f.button class: "close", title: "Delete" do %>&times;<% end %>
+		<% end %>
+	<% end %>
+
 	<%= link_to image_tag(comment.user.profile.avatar.url(:thumb), alt: comment.user.name, class: "gravatar"), comment.user %>
+
 	<strong class="user"><%= link_to comment.user.name, comment.user %></strong>
+
 	<span class="content">
       <%= comment.body %>
     </span>
+
 	<span class="timestamp">
 	  <%= time_ago_or_date(comment.created_at) %>.
-	  <% if current_user == comment.user %>
-	  <%= link_to "delete", comment, method: :delete,
-	                                   data: { confirm: "You sure?" } %>
-	  <% end %>
 	</span>
+
 </li>

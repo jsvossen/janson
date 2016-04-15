@@ -5,7 +5,7 @@ class LikesController < ApplicationController
 	def create
 		@like = current_user.likes.build(like_params)
 		if @like.save
-			@like.notifications.create(user: @like.post.user)
+			@like.notifications.create(user: @like.post.user) if @like.user != @like.post.user
 			flash[:success] = "Post liked!"
 			redirect_to_back_or_default
 		else
