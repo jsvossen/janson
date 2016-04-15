@@ -1,17 +1,18 @@
 <% friendship = Friendship.find_by(user: current_user, friend: friend) %>
+<% size ||= "xs" %>
 
 <span class="friend-links add">
 <% if !friendship %>
 
 	<%= form_for @friend_req do |f| %>
 		<%= f.hidden_field :friend_id, value: friend.id %>
-		<%= f.submit "+ Add Friend", class: "btn btn-xs btn-default" %>
+		<%= f.submit "+ Add Friend", class: "btn btn-#{size} btn-default" %>
 	<% end %>
 
 <% else %>
 
 	<%= form_for friendship do |f| %>
-		<%= f.submit "+ Add Friend", class: "btn btn-xs btn-default" %>&nbsp;&nbsp;
+		<%= f.submit "+ Add Friend", class: "btn btn-#{size} btn-default" %>&nbsp;&nbsp;
 		<%= link_to "Decline", friendship, method: "delete" %>
 	<% end %>
 

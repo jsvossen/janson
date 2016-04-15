@@ -20,11 +20,20 @@
 <% end %>
 <section class="friends">
 	<% if @user.friends.accepted.any? %>
-		<p><%= link_to pluralize(@user.friends.accepted.count, "Friend"), user_friends_path(@user) %></p>
+		<p class="friend-count"><%= link_to user_friends_path(@user) do %> 
+			<%= pluralize(@user.friends.accepted.count, "Friend") %> 
+			 <%= "(view all)" if @user.friends.accepted.count > 12 %> 
+			<% end %>
+		</p>
 		<div class="user_avatars">
-			<% @user.friends.accepted.each do |user| %>
+			<% @user.friends.accepted.order("random()").limit(12).each do |user| %>
 				<%= link_to image_tag(user.profile.avatar.url(:thumb), alt: user.name, class: "gravatar"), user, title: user.name %>
 			<% end %>
 		</div>
 	<% end %>
+	<% if current_user.friends.include?(@user) && current_user.friend_status(@user) != "pending" %>
+    	<div class="text-muted"><em><%= render "friendships/remove_friend", friend: @user %></em></div>
+    <% else %>
+    	<%= render "friendships/add_friend", friend: @user, size: "md" if @user != current_user %>
+    <% end %>
 </section>
