@@ -16,6 +16,15 @@ class Post < ActiveRecord::Base
 		picture_file_name
 	end
 
+	def body_trimmed(limit = 1000)
+		if body.size > limit 
+			trimmed = body[0..limit]
+			trimmed = trimmed + "..." if trimmed.size < body.size
+		else
+			body
+		end
+	end
+
 	private
 
 	  	# Validates either body or photo is present

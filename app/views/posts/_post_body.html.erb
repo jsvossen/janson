@@ -1,2 +1,7 @@
-<%= post.body %>
+<% if action_name == "index" %>
+	<%= post.body_trimmed %>
+	<%= link_to("Read more", post) if post.body.size > post.body_trimmed.size %>
+<% else %>
+	<%= post.body %>
+<% end %>
 <%= image_tag @post.picture.url(:medium) if post.picture? %>
