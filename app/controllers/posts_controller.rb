@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@comments = @post.comments.paginate(page: params[:page]).order_desc
 	end
 
 	def create

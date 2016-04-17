@@ -1,23 +1,13 @@
 <li id="post-<%= post.id %>" class="post panel panel-default">
   <div class="panel-body">
-    <%= link_to image_tag(post.user.profile.avatar.url(:thumb), alt: post.user.name, class: "gravatar"), post.user %>
-    <strong class="user"><%= link_to post.user.name, post.user %></strong>
-    <small class="timestamp">
-      Posted <%= time_ago_or_date(post.created_at) %>.
-      <% if current_user == post.user %>
-      <%= link_to "delete", post, method: :delete,
-                                       data: { confirm: "You sure?" } %>
-      <% end %>
-    </small>
+      <%= render "post_header", post: post %>
     <span class="content">
-      <%= post.body %>
-      <%= image_tag post.picture.url(:medium) if post.picture? %>
+      <%= render "post_body", post: post %>
     </span>
   </div>
   <div class="panel-footer">
     <div class="post-stats text-muted">
-      <%= render partial: "likes/like_form", :locals => { :post => post } %>
-      <small><%= render partial: "posts/stats", :locals => { :post => post } %></small>
+      <%= render "post_footer", post: post %>
     </div>
     <div class="comments">
       <% if post.comments.any? %>

@@ -1,3 +1,25 @@
 <div class="col-md-6 col-md-offset-3 posts">
-	<%= render @post %>
+	<div id="post-<%= @post.id %>" class="post show-post panel panel-default">
+
+  		<div class="panel-body">
+		    <%= render "post_header", post: @post %>
+		    <span class="content">
+		      <%= render "post_body", post: @post %>
+		    </span>
+		</div>
+
+  		<div class="panel-footer">
+		    <div class="post-stats text-muted">
+		      <%= render "post_footer", post: @post %>
+		    </div>
+		    <div class="comments">
+		      <%= render partial: "comments/comment_form", :locals => { :post => @post } %>
+		      <% if @comments.any? %>
+		        <ul><%= render @comments %></ul>
+		      <% end %>
+		      <small><%= will_paginate @comments %></small>
+		    </div>
+		</div>
+
+  	</div>
 </div>
