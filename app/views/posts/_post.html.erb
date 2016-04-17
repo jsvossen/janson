@@ -11,7 +11,8 @@
     </div>
     <div class="comments">
       <% if post.comments.any? %>
-        <ul><%= render partial: "comments/comment", collection: post.comments.order_asc %></ul>
+        <%= link_to("View all comments", post, class: "more-link") if post.comments.count > post.comments.most_recent.count %>
+        <ul><%= render partial: "comments/comment", collection: post.comments.most_recent.reverse %></ul>
       <% end %>
       <%= render partial: "comments/comment_form", :locals => { :post => post } %>
     </div>

@@ -9,5 +9,6 @@ class Comment < ActiveRecord::Base
 
 	scope :order_asc, -> { order(created_at: :asc) }
 	scope :order_desc, -> { order(created_at: :desc) }
+	scope :most_recent, -> (limit=5) { order(created_at: :desc).limit(limit) }
 
 end
