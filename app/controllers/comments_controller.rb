@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
 			redirect_to_back_or_default
 		else
 			flash[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
-			redirect_to_back_or_default
+			@post = @comment.post
+			render "posts/show"
 		end
 	end
 

@@ -21,7 +21,7 @@
     </div>
     <div class="comments">
       <% if post.comments.any? %>
-        <ul><%= render partial: "comments/comment", collection: post.comments %></ul>
+        <ul><%= render partial: "comments/comment", collection: post.comments.order_asc %></ul>
       <% end %>
       <%= render partial: "comments/comment_form", :locals => { :post => post } %>
     </div>

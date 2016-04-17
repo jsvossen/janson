@@ -4,6 +4,7 @@
 
 	<% if @notifications.any? %>
 		<%= render @notifications %>
+		<%= will_paginate @notifications %>
 	<% else %>
 		<p>No pending notifications.</p>
 	<% end %>

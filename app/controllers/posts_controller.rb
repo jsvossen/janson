@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
 	def index
 		@post = current_user.posts.build
+		@posts = current_user.news_feed.paginate(page: params[:page])
 	end
 
 	def show
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		@posts = current_user.news_feed.paginate(page: params[:page])
 		@post = current_user.posts.build(post_params)
 		if @post.save
 			flash[:success] = "Post created!"

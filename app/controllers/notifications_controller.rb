@@ -2,9 +2,9 @@ class NotificationsController < ApplicationController
 
 	before_action :authenticate_user!
 	before_action :correct_user, only: :destroy
-
+	
 	def index
-		@notifications = current_user.notifications
+		@notifications = current_user.notifications.paginate(page: params[:page])
 	end
 
 	def destroy
