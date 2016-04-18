@@ -1,4 +1,4 @@
-<% if action_name == "index" %>
+<% if controller_name == "posts" && (action_name == "index" || action_name == "create") %>
 	<%= post.body_trimmed %>
 	<%= link_to("Read more", post) if post.body.size > post.body_trimmed.size %>
 <% else %>

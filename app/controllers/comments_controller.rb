@@ -10,8 +10,9 @@ class CommentsController < ApplicationController
 			flash[:success] = "Comment added!"
 			redirect_to_back_or_default
 		else
-			flash[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
+			flash.now[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
 			@post = @comment.post
+			@comments = @comment.post.comments.paginate(page: params[:page]).order_desc
 			render "posts/show"
 		end
 	end

@@ -2,15 +2,15 @@
 	<div id="post-<%= @post.id %>" class="post show-post panel panel-default">
 
   		<div class="panel-body">
-		    <%= render "post_header", post: @post %>
+		    <%= render "posts/post_header", post: @post %>
 		    <span class="content">
-		      <%= render "post_body", post: @post %>
+		      <%= render "posts/post_body", post: @post %>
 		    </span>
 		</div>
 
   		<div class="panel-footer">
 		    <div class="post-stats text-muted">
-		      <%= render "post_footer", post: @post %>
+		      <%= render "posts/post_footer", post: @post %>
 		    </div>
 		    <div class="comments">
 		      <%= render partial: "comments/comment_form", :locals => { :post => @post } %>

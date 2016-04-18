@@ -1,17 +1,17 @@
 <li id="post-<%= post.id %>" class="post panel panel-default">
   <div class="panel-body">
-      <%= render "post_header", post: post %>
+      <%= render "posts/post_header", post: post %>
     <span class="content">
-      <%= render "post_body", post: post %>
+      <%= render "posts/post_body", post: post %>
     </span>
   </div>
   <div class="panel-footer">
     <div class="post-stats text-muted">
-      <%= render "post_footer", post: post %>
+      <%= render "posts/post_footer", post: post %>
     </div>
     <div class="comments">
       <% if post.comments.any? %>
-        <%= link_to("View all comments", post, class: "more-link") if post.comments.count > post.comments.most_recent.count %>
+      <%= link_to("View all comments", post, class: "more-link") if post.comments.count > post.comments.most_recent.count %>
         <ul><%= render partial: "comments/comment", collection: post.comments.most_recent.reverse %></ul>
       <% end %>
       <%= render partial: "comments/comment_form", :locals => { :post => post } %>
