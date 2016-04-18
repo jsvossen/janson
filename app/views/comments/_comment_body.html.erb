@@ -1,0 +1,6 @@
+<% if controller_name == "posts" && (action_name == "index" || action_name == "create") %>
+	<%= comment.body_trimmed %>
+	<%= link_to("Read more", post_path(comment.post, anchor: "comment-#{comment.id}")) if comment.body.size > comment.body_trimmed.size %>
+<% else %>
+	<%= comment.body %>
+<% end %>

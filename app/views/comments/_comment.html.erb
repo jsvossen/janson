@@ -11,7 +11,7 @@
 	<strong class="user"><%= link_to comment.user.name, comment.user %></strong>
 
 	<span class="content">
-      <%= comment.body %>
+      <%= render "comments/comment_body", comment: comment %>
     </span>
 
 	<span class="timestamp">
