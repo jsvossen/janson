@@ -5,9 +5,8 @@
       	<%= image_tag(@user.profile.avatar.url(:medium), alt: @user.name, class: "gravatar") %>
         <%= @user.name %>
       </h1>
-      <p class="email"><%= @user.email %></p>
-	  <% if @user.location && !@user.location.empty? %>
-	  	<p class="location info">From <%= @user.location %></p>
+      <% if @user.location && !@user.location.empty? %>
+     	<p class="location"><%= @user.location %></p>	  
 	  <% end %>
 	  <% if @user.birthday %>
 	  	<p class="age info"><%= @user.age %> years old</p>
