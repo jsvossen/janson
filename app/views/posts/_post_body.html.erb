@@ -4,4 +4,4 @@
 <% else %>
 	<%= post.body %>
 <% end %>
-<%= image_tag @post.picture.url(:medium) if post.picture? %>
+<%= image_tag post.picture.url(:medium) if post.picture? %>
