@@ -87,4 +87,10 @@ Rails.application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket => ENV['AWS_S3_BUCKET']
+  }
+
 end

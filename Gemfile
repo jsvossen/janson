@@ -67,6 +67,7 @@ end
 
 group :production do
 	gem 'rails_12factor'
+  gem 'aws-sdk', '>= 2.0.34'
 end
 
 ruby "2.2.1"
