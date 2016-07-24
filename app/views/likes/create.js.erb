@@ -1,0 +1,2 @@
+$("#post-<%= @like.post.id %> span.like-form").html("<%= escape_javascript(render :partial => 'like_form', :locals => {:post => @like.post}) %>");
+$("#post-<%= @like.post.id %> small.stats").html("<%= escape_javascript(render :partial => 'posts/stats', :locals => {:post => @like.post}) %>");
