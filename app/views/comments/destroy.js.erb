@@ -1,0 +1,2 @@
+$("#comment-<%= @comment.id %>").fadeOut("fast", function() { $(this).remove(); });
+$("#post-<%= @comment.post.id %> small.stats").html("<%= escape_javascript(render :partial => 'posts/stats', :locals => {:post => @comment.post}) %>");

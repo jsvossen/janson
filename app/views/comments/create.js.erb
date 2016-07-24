@@ -1,0 +1,11 @@
+var newComment = "<li id='comment-<%= @comment.id %>'><%= escape_javascript(render :partial => 'comment', :locals => {:comment => @comment}) %></li>";
+var postList = "#post-<%= @comment.post.id %> .comments ul";
+
+if ( $('ol.posts').length ) {
+	$(newComment).hide().appendTo(postList).fadeIn("fast");
+} else {
+	$(newComment).hide().prependTo(postList).fadeIn("fast");
+}
+
+
+$("#post-<%= @comment.post.id %> small.stats").html("<%= escape_javascript(render :partial => 'posts/stats', :locals => {:post => @comment.post}) %>");

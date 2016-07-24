@@ -7,8 +7,13 @@ class CommentsController < ApplicationController
 		@comment = current_user.comments.build(comment_params)
 		if @comment.save
 			@comment.notifications.create(user: @comment.post.user) if @comment.post.user != @comment.user
-			flash[:success] = "Comment added!"
-			redirect_to_back_or_default
+			respond_to do |format|
+				format.html {
+					flash[:success] = "Comment added!"
+					redirect_to_back_or_default
+				}
+				format.js
+			end
 		else
 			flash.now[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
 			@post = @comment.post
@@ -18,9 +23,15 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		Comment.find(params[:id]).destroy
-		flash[:success] = "Comment deleted."
-		redirect_to_back_or_default
+		@comment = Comment.find(params[:id])
+		@comment.destroy
+		respond_to do |format|
+			format.html {
+				flash[:success] = "Comment deleted."
+				redirect_to_back_or_default
+			}
+			format.js
+		end
 	end
 
 	private
