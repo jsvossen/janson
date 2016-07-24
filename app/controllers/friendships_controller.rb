@@ -24,7 +24,7 @@ class FriendshipsController < ApplicationController
 		friendship = Friendship.find(params[:id])
 		reciprocal = Friendship.find_by(user_id: friendship.friend_id, friend_id: friendship.user_id)
 		if friendship.update_attributes(status: "accepted") && reciprocal.update_attributes(status: "accepted")
-			Notification.find_by(notifiable: friendship).destroy
+			Notification.find_by(notifiable: friendship).destroy if Notification.find_by(notifiable: friendship)
 			reciprocal.notifications.create(user_id: reciprocal.user_id)
 			friend = friendship.friend
 			flash[:success] = "You are now friends with #{friend.name}!"
