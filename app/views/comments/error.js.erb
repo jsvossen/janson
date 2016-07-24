@@ -1,0 +1,9 @@
+var commentForm = "#post-<%= @comment.post.id %> .comment-form .form-group";
+
+$(commentForm).addClass("has-error");
+
+if ( !$(commentForm + " .help-block").length ) {
+	$(commentForm).append("<span class='help-block'></span>");
+}
+
+$(commentForm + " .help-block").html("<%= @errors %>");

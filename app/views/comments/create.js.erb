@@ -7,6 +7,8 @@ if ( $('ol.posts').length ) {
 	$(newComment).hide().prependTo(postList).fadeIn("fast");
 }
 
-$("#post-<%= @comment.post.id %> .comment-form textarea").val("");
+$("#post-<%= @comment.post.id %> .comment-form textarea").val("")
+$("#post-<%= @comment.post.id %> .comment-form .form-group").removeClass("has-error");
+$("#post-<%= @comment.post.id %> .comment-form .help-block").remove();
 
 $("#post-<%= @comment.post.id %> small.stats").html("<%= escape_javascript(render :partial => 'posts/stats', :locals => {:post => @comment.post}) %>");

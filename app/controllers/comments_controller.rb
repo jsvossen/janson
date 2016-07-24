@@ -5,21 +5,41 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = current_user.comments.build(comment_params)
-		if @comment.save
-			@comment.notifications.create(user: @comment.post.user) if @comment.post.user != @comment.user
-			respond_to do |format|
+		respond_to do |format|
+			if @comment.save
+				@comment.notifications.create(user: @comment.post.user) if @comment.post.user != @comment.user
 				format.html {
 					flash[:success] = "Comment added!"
 					redirect_to_back_or_default
 				}
 				format.js
+			else
+				@errors = @comment.errors.full_messages.join('. ')
+				format.html {
+					flash.now[:danger] = "Error: #{@errors}."
+					@post = @comment.post
+					@comments = @comment.post.comments.paginate(page: params[:page]).order_desc
+					render "posts/show"
+				}
+				format.js { render "error" }
 			end
-		else
-			flash.now[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
-			@post = @comment.post
-			@comments = @comment.post.comments.paginate(page: params[:page]).order_desc
-			render "posts/show"
 		end
+
+		# if @comment.save
+		# 	@comment.notifications.create(user: @comment.post.user) if @comment.post.user != @comment.user
+		# 	respond_to do |format|
+		# 		format.html {
+		# 			flash[:success] = "Comment added!"
+		# 			redirect_to_back_or_default
+		# 		}
+		# 		format.js
+		# 	end
+		# else
+		# 	flash.now[:danger] = "Error: #{@comment.errors.full_messages.join('. ')}."
+		# 	@post = @comment.post
+		# 	@comments = @comment.post.comments.paginate(page: params[:page]).order_desc
+		# 	render "posts/show"
+		# end
 	end
 
 	def destroy
